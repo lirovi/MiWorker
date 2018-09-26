@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- ejemplo desarrollado por Limber Rojas-->
+<html>
+    <head>
+        <title>Probando Web Workers</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>Ejemplo de uso de Web Workers</h1>
+        <h5>Por limber Rojas</h5>
+        <br/><br/>
+        <button onclick="iniciaw()">Iniciar Web Worker</button>
+        <button onclick="pararw()">Detener Web Worker</button>
+        
+        <p>Contador en subproceso hilo: <output id="resultado">0</output></p>
+        <br/><br/>
+        <div id="salida"></div>
+        
+        <script>
+            var w;
+            function iniciaw(){
+                if(typeof(w)=="undefined")
+                {
+                    w= new Worker("wworker.js");
+                }
+                w.onmessage=function(event)
+                {
+                    document.getElementById("resultado").innerHTML=event.data;
+                  
+                };
+            }
+            function pararw(){
+                w.terminate();
+            }
+        </script>
+    </body>
+</html>
